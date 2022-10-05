@@ -2,7 +2,7 @@
   "name": "backend-nodejs-express",
   "version": "1.0.0",
   "description": "Backend con node.js, express y postgresql",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
