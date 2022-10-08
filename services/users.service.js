@@ -1,11 +1,8 @@
 const boom = require('@hapi/boom');
-const pool = require('../libs/postgres.pool');
+const sequelize = require('../libs/sequelize');
 
 class UsersService{
-  constructor(){
-    this.pool = pool;
-    this.pool.on('error', (err)=> console.error(err));
-  }
+  constructor(){}
 
   // metodo para crear usuarios
   async create(data){
@@ -15,8 +12,8 @@ class UsersService{
   // metodo para ver todos los usuarios
   async findAll(){
     const query = 'select * from task;';
-    const rta = await this.pool.query(query);
-    return rta.rows;
+    const [data] = await sequelize.query(query);
+    return data;
   }
 
   // metodo para consultar un user por su id
