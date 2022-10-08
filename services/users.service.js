@@ -1,7 +1,11 @@
 const boom = require('@hapi/boom');
-const getConnection = require('../libs/postgres');
+const pool = require('../libs/postgres.pool');
+
 class UsersService{
-  constructor(){}
+  constructor(){
+    this.pool = pool;
+    this.pool.on('error', (err)=> console.error(err));
+  }
 
   // metodo para crear usuarios
   async create(data){
@@ -10,8 +14,8 @@ class UsersService{
 
   // metodo para ver todos los usuarios
   async findAll(){
-    const client = await getConnection();
-    const rta = await client.query('select * from task');
+    const query = 'select * from task;';
+    const rta = await this.pool.query(query);
     return rta.rows;
   }
 
