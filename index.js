@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { logErrors, errorHandler , boomErrorHandler} = require('./middlewares/error.handler');
+const { logErrors, errorHandler , boomErrorHandler, ormErrorHandler} = require('./middlewares/error.handler');
 const routerApi = require('./routes');
 
 const app = express();
@@ -19,7 +19,7 @@ const options = {
   }
 };
 
-app.use(cors());
+app.use(cors(options));
 
 app.get('/',(req,res)=>{
   res.send('Hola mi serve en express');
@@ -28,8 +28,10 @@ app.get('/',(req,res)=>{
 routerApi(app);
 
 app.use(logErrors);
+app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
+
 
 app.listen(port,()=>{
   console.log('Mi port: ' + port)
