@@ -12,7 +12,9 @@ class UsersService{
 
   // metodo para ver todos los usuarios
   async findAll(){
-    const rta = await models.User.findAll();
+    const rta = await models.User.findAll({
+      include: ['customer']
+    });
     return rta;
   }
 
