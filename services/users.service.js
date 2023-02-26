@@ -24,6 +24,14 @@ class UsersService{
     return rta;
   }
 
+  // metodo para ver todos los usuarios
+  async findByEmail(email){
+    const rta = await models.User.findOne({
+      where: { email }
+    });
+    return rta;
+  }
+
   // metodo para consultar un user por su id
   async findOne(id){
     const user = await models.User.findByPk(id);
