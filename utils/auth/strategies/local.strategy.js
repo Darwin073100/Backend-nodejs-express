@@ -1,5 +1,5 @@
 const { Strategy } = require("passport-local");
-const bcrypt = require("bcrypt");
+const bcryptJs = require("bcryptjs");
 const boom = require("@hapi/boom");
 const UserService = require("../../../services/users.service");
 
@@ -14,7 +14,7 @@ const LocalStrategy = new Strategy({
       if (!user) {
         done(boom.unauthorized, false);
       }
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = await bcryptJs.compare(password, user.password);
       if (!isMatch) {
         done(boom.unauthorized(), false);
       }
