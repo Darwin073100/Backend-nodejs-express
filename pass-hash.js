@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const hashPassword = async ()=>{
   const myPassword = 'admin 123 .202';
